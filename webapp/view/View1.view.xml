@@ -1,0 +1,193 @@
+<!-- <mvc:View controllerName="flexiblelayout.flexiblelayoutableproject.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content >
+  <Table
+            id="table1"
+            mode="MultiSelect"
+            sticky="ColumnHeaders,HeaderToolbar"
+            alternateRowColors="true"
+            inset="true"
+            items="{Data1>/results}"
+        >
+            <columns>
+                <Column demandPopin="true">
+                    <Text text="Customer Number" />
+                </Column>
+
+                <Column demandPopin="true">
+                    <Text text=" Name" />
+                </Column>
+
+                <Column demandPopin="true">
+                    <Text text="E-MailAddress" />
+                </Column>
+
+                <Column demandPopin="true">
+                    <Text text=" First telephone number" />
+                </Column>
+
+                <Column demandPopin="true">
+                    <Text text="UserId" />
+                </Column>
+
+                <Column demandPopin="true">
+                    <Text text="Password" />
+                </Column>
+            </columns>
+
+            <items>
+                <ColumnListItem>
+                    <cells>
+                        <Input
+                            value="{Data1>Kunnr}"
+                            editable="false"
+                            id="idEmpNm"
+                        />
+
+                        <Input
+                            value="{Data1>Name1}"
+                            editable="false"
+                            id="idEmpmob"
+                        />
+
+                        <Input
+                            value="{Data1>SmtpAddr}"
+                            editable="false"
+                            id="idEmpEml"
+                        />
+
+                        <Input
+                            value="{Data1>Telf1}"
+                            editable="false"
+                            id="idEmpDep"
+                        />
+
+                        <Input
+                            value="{Data1>AppUsrid}"
+                            editable="false"
+                            id="idEmpBpay"
+                        />
+
+                        <Input
+                            value="{Data1>Password}"
+                            editable="false"
+                            id="idEmpHra"
+                        />
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+                </content>
+    </Page>
+</mvc:View>  -->
+<mvc:View
+    displayBlock="true"
+    controllerName="flexiblelayout.flexiblelayoutableproject.controller.View1"
+    height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:mvc="sap.ui.core.mvc"
+>
+    <Page
+        id="page"
+        title="{i18n>title}"
+        titleAlignment="Center"
+    >
+        <headerContent>
+            <Button
+                text="Play Sound"
+                icon="sap-icon://sound-loud"
+                press="onPlaySound"
+            />
+        </headerContent>
+        <f:DynamicPage
+            id="dynamicPageId"
+            toggleHeaderOnTitleClick="false"
+        >
+            <f:title>
+                <f:DynamicPageTitle>
+                    <f:heading>
+                        <Title text="Products" />
+                    </f:heading>
+                </f:DynamicPageTitle>
+            </f:title>
+
+            <f:content>
+                <Table
+                    id="productsTable"
+                    mode="SingleSelectMaster"
+                    itemPress="onListItemPress"
+                    inset="false"
+                    items="{
+					path: 'Data1>/results'
+				}"
+                    class="sapFDynamicPageAlignContent"
+                    width="auto"
+                >
+                    <headerToolbar>
+                        <OverflowToolbar>
+                            <ToolbarSpacer />
+                            <SearchField
+                                search="onSearch"
+                                width="17.5rem"
+                            />
+                            <OverflowToolbarButton
+                                icon="sap-icon://add"
+                                type="Transparent"
+                                press="onAdd"
+                            />
+                            <OverflowToolbarButton
+                                icon="sap-icon://sort"
+                                type="Transparent"
+                                press="onSort"
+                            />
+                        </OverflowToolbar>
+                    </headerToolbar>
+                    
+                    <columns>
+                        <Column width="12em">
+                            <Text text="Product" />
+                        </Column>
+                        <Column hAlign="End">
+                            <Text text="Password" />
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem type="Navigation">
+                            <cells>
+                                <ObjectIdentifier
+                                    title="{Data1>Name1}"
+                                    text="{Data1>Password}"
+                                />
+                                <ObjectNumber
+                                    number="{
+										parts:[{path:'products>Price'},{path:'products>CurrencyCode'}],
+										type: 'sap.ui.model.type.Currency',
+										formatOptions: {showMeasure: false}
+									}"
+                                    unit="{products>CurrencyCode}"
+                                />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </f:content>
+
+            <f:footer>
+                <OverflowToolbar>
+                    <ToolbarSpacer />
+                    <Button
+                        type="Accept"
+                        text="Accept"
+                    />
+                    <Button
+                        type="Reject"
+                        text="Reject"
+                    />
+                </OverflowToolbar>
+            </f:footer>
+        </f:DynamicPage>
+    </Page>
+</mvc:View>
